@@ -17,7 +17,7 @@ npm run build    # production build into _site/
 | --- | --- |
 | Top banner + navigation (including the **MY CALENDAR** timetable image) | `src/_includes/nav.njk` |
 | Footer (email, phone, Instagram) | `src/_includes/footer.njk` |
-| Course cards shown on Home, About, Studio and Candles pages | `src/_includes/course-cards.njk` |
+| Course cards shown on Home, About, Studio and Candles pages, and under each course page | `src/_includes/course-cards.njk` (styles at the end of `src/css/site.css`) |
 | Course page design (`/courses/...`) | `src/_includes/layouts/course.njk` |
 | Pages | `src/index.njk`, `about.njk`, `contact.njk`, `bridport-wellness-studio.njk`, `ayurvedic-candles.njk`, `404.njk` |
 | Styles | `src/css/blue-veda.webflow.css` (Webflow export), `src/css/site.css` (our additions) |

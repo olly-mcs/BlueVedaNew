@@ -10,12 +10,155 @@
 @media screen and (min-width: 480px) {
   .hero-slider-content.contact.contatpage { width: 80%; }
 
-  .free-plan-container > .products-list-wrapper { width: 80%; margin-left: auto; margin-right: auto; }
-  .free-plan-container .product-card { width: 100%; }
+  .free-plan-container > .products-list-wrapper,
+  .course-list-heading { width: 80%; margin-left: auto; margin-right: auto; }
 }
 
 .grid-4 { width: 80%; margin-left: auto; margin-right: auto; }
 
 @media screen and (max-width: 479px) {
   .grid-4 { width: 90%; }
+}
+
+/* Course cards (src/_includes/course-cards.njk).
+   Two or more show in a grid; a single card (on a course page) is centred at the same size.
+   Every image is cropped to the same 4:3 shape. */
+@media screen and (max-width: 479px) {
+  .free-plan-container > .products-list-wrapper,
+  .course-list-heading { width: 90%; margin-left: auto; margin-right: auto; }
+}
+
+.course-list-heading { align-self: center; margin-bottom: 24px; }
+
+.product-list.course-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  justify-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  margin-top: 0;
+}
+.product-list.course-list--single { grid-template-columns: 1fr; }
+
+.course-card-item { align-items: stretch; }
+
+.product-card.course-card {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px #0811580a, 0 8px 24px #0811580f;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .5s cubic-bezier(.23, 1, .32, 1), box-shadow .5s;
+}
+.product-card.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 4px #0811580d, 0 18px 40px #0811581a;
+}
+
+.course-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--white-smoke);
+}
+.course-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s cubic-bezier(.23, 1, .32, 1);
+}
+.course-card:hover .course-card__image { transform: scale(1.04); }
+
+.course-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 36px;
+}
+
+.course-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 0 0 16px;
+}
+.course-card__meta dt {
+  color: var(--textgrey);
+  margin-bottom: 4px;
+  font-family: Arvo, serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.course-card__meta dd {
+  color: #555;
+  margin: 0;
+  font-family: Arvo, serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.course-card__title {
+  color: var(--sage);
+  margin: 0 0 12px;
+  font-family: Arvo, serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.course-card__text {
+  color: var(--textgrey);
+  margin: 0 0 24px;
+  font-family: Sato, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.course-card__cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sage);
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #b2ac8859;
+  font-family: Red Hat Display, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.course-card__cta::after {
+  content: "\2192";
+  font-size: 16px;
+  transition: transform .5s cubic-bezier(.23, 1, .32, 1);
+}
+.course-card:hover .course-card__cta::after { transform: translateX(6px); }
+
+@media screen and (min-width: 768px) {
+  /* A single card is the same size as one card in a pair, so the image matches */
+  .product-list.course-list--single { grid-template-columns: minmax(0, calc(50% - 16px)); justify-content: center; }
+  .course-list-heading { text-align: center; }
+}
+
+@media screen and (max-width: 767px) {
+  .product-list.course-list { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media screen and (max-width: 479px) {
+  .product-card.course-card:hover { transform: none; }
+  .course-card__body { padding: 24px; }
+  .course-card__title { font-size: 24px; }
 }
