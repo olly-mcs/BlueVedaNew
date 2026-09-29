@@ -463,3 +463,115 @@ p.heading1specialabout.wellness,
   .site-footer__brand, .site-footer__contact { grid-column: 1 / -1; }
   .site-footer__bottom { flex-direction: column; }
 }
+
+/* ------------------------------------------------------------------
+   Testimonials slider (home page)
+   The Webflow slider still drives it; this only restyles it.
+   ------------------------------------------------------------------ */
+.toplandingsection.mid.testimonials-section {
+  background-image: linear-gradient(#2a241c73, #2a241c8c), url('../images/_R6B0271-1-1.jpg');
+  background-position: 50%;
+  background-size: cover;
+  height: auto;
+  max-height: none;
+  padding: 104px 0;
+}
+
+.landingpagetopdiv.testimonials-card {
+  width: 90%;
+  max-width: 760px;
+  background-color: #faf8f2f5;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px #0000002e;
+  padding: 48px 72px 36px;
+  text-align: center;
+}
+
+.testimonials-card__mark {
+  display: block;
+  width: 40px;
+  height: auto;
+  margin: 0 auto 16px;
+}
+.testimonials-card__eyebrow {
+  color: var(--sage);
+  margin-bottom: 28px;
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Size the slider to its tallest quote, so nothing overlaps and the card does not jump */
+.testimonials-card .slider-4.w-slider {
+  height: auto;
+  background: none;
+}
+.testimonials-card .w-slide { vertical-align: middle; }
+
+.testimonials-card .slidertestimonialdiv { display: block; height: auto; }
+.testimonials-card .slidertestimonial {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  color: #5a5a5a;
+  margin: 0 auto;
+  padding: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(18px, 0.35vw + 16px, 21px);
+  font-weight: 400;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+/* Dots */
+.testimonials-card .w-slider-nav {
+  position: static;
+  height: auto;
+  padding-top: 32px;
+  font-size: 8px;
+  line-height: 1;
+}
+.testimonials-card .w-slider-dot {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px var(--sage);
+  transition: background-color .3s, transform .3s;
+}
+.testimonials-card .w-slider-dot.w-active { background-color: var(--sage); transform: scale(1.15); }
+.testimonials-card .w-slider-dot:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+/* Arrows: a thin chevron at each side of the quote */
+.testimonials-card .w-slider-arrow-left,
+.testimonials-card .w-slider-arrow-right {
+  width: 44px;
+  bottom: 40px;
+  opacity: .55;
+  transition: opacity .3s;
+}
+.testimonials-card .w-slider-arrow-left { left: -56px; }
+.testimonials-card .w-slider-arrow-right { right: -56px; }
+.testimonials-card .w-slider-arrow-left:hover,
+.testimonials-card .w-slider-arrow-right:hover { opacity: 1; }
+.testimonials-card .w-slider-arrow-left::before,
+.testimonials-card .w-slider-arrow-right::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-top: 1.5px solid var(--sage);
+  border-left: 1.5px solid var(--sage);
+}
+.testimonials-card .w-slider-arrow-left::before { transform: translate(-30%, -50%) rotate(-45deg); }
+.testimonials-card .w-slider-arrow-right::before { transform: translate(-70%, -50%) rotate(135deg); }
+
+@media screen and (max-width: 767px) {
+  .toplandingsection.mid.testimonials-section { padding: 64px 0; background-attachment: scroll; }
+  .landingpagetopdiv.testimonials-card { padding: 40px 28px 28px; }
+  .testimonials-card .w-slider-arrow-left,
+  .testimonials-card .w-slider-arrow-right { display: none; }
+}
