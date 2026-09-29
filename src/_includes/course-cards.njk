@@ -1,0 +1,25 @@
+{%- set items = collections.courses | publishedCourses -%}
+<div class="products-list-wrapper w-dyn-list">
+  <div role="list" class="product-list hplist w-dyn-items">
+    {%- for c in items %}
+    <div id="w-node-_19ddf4d1-f9ab-8dae-c19a-81d10fb8a260-0fb8a25c" role="listitem" class="product-item w-dyn-item">
+      <a href="/courses/{{ c.data.slug }}" class="product-card w-inline-block"><img src="{{ c.data.image }}" loading="lazy" alt="" class="image-12{{ ' w-dyn-bind-empty' if not c.data.image }}">
+        <div class="product-description _2column">
+          <div>
+            <div class="label _15-margin sessionlength">SESSION LENGTH</div>
+            <div class="label _15-margin{{ ' w-dyn-bind-empty' if not c.data.duration }}">{{ c.data.duration }}</div>
+            <h5 class="heading-3 mobileblocks">{{ c.data.title }}</h5>
+            <div class="text-block-3{{ ' w-dyn-bind-empty' if not c.data.blockDescription }}">{{ c.data.blockDescription }}</div>
+          </div>
+          <div class="link">Book a session</div>
+        </div>
+      </a>
+    </div>
+    {%- endfor %}
+  </div>
+  {%- if not items.length %}
+  <div class="w-dyn-empty">
+    <div>No items found.</div>
+  </div>
+  {%- endif %}
+</div>

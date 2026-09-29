@@ -1,0 +1,27 @@
+<div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar-2 w-nav">
+  <div class="div-block-4 w-clearfix">
+    <a href="/"{% if nav == 'home' %} aria-current="page"{% endif %} class="logo-container w-nav-brand{% if nav == 'home' %} w--current{% endif %}"><img src="/images/BlueVeda.png" loading="lazy" width="135" alt="" class="image-4"></a>
+  </div>
+  <div class="container-3 w-container">
+    <nav role="navigation" class="nav-menu-left right w-nav-menu">
+      <div data-hover="true" data-delay="0" class="dropdown-2 w-dropdown">
+        <div class="nav-link-3 w-dropdown-toggle">
+          <div class="w-icon-dropdown-toggle"></div>
+          <div>MY CALENDAR</div>
+        </div>
+        <nav class="dropdown-list-2 w-dropdown-list"><img src="/images/Blu-Veda-Autumn-Winter-Schedule.webp" loading="lazy" width="471" sizes="100vw" alt="" srcset="/images/Blu-Veda-Autumn-Winter-Schedule-p-500.webp 500w, /images/Blu-Veda-Autumn-Winter-Schedule.webp 800w" class="image-10"></nav>
+      </div>
+      <a href="/bridport-wellness-studio"{% if nav == 'studio' %} aria-current="page"{% endif %} class="nav-link-3 w-nav-link{% if nav == 'studio' %} w--current{% endif %}">WELLNESS STUDIO</a>
+      <a href="/courses/yoga"{% if slug == 'yoga' %} aria-current="page"{% endif %} class="nav-link-3 w-nav-link{% if slug == 'yoga' %} w--current{% endif %}">YOGA</a>
+      <a href="/courses/holistic-therapies"{% if slug == 'holistic-therapies' %} aria-current="page"{% endif %} class="nav-link-3 w-nav-link{% if slug == 'holistic-therapies' %} w--current{% endif %}">TREATMENTS</a>
+      <a href="/about"{% if nav == 'about' %} aria-current="page"{% endif %} class="nav-link-3 w-nav-link{% if nav == 'about' %} w--current{% endif %}">ABOUT ME</a>
+      <a href="/ayurvedic-candles"{% if nav == 'candles' %} aria-current="page"{% endif %} class="nav-link-3 w-nav-link{% if nav == 'candles' %} w--current{% endif %}">AYURVEDIC CANDLES</a>
+    </nav>
+    <div class="menu-button-2 w-nav-button">
+      <div class="w-icon-nav-menu"></div>
+    </div>
+  </div>
+  <div class="w-layout-blockcontainer w-container">
+    <a href="/contact"{% if nav == 'contact' %} aria-current="page"{% endif %} class="button mob header newbutton w-button{% if nav == 'contact' %} w--current{% endif %}">BOOK A SESSION</a>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+/* Rules Webflow adds on its own hosting but leaves out of the code export */
+.w-dyn-hide, .w-dyn-bind-empty, .w-condition-invisible { display: none !important; }
+.w-dyn-empty { background-color: #ddd; padding: 10px; }
+
+.netlify-form { margin: 0 0 15px; }
