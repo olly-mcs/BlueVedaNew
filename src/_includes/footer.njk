@@ -1,14 +1,48 @@
-<div class="section footer-section">
-  <div class="w-layout-grid grid-4">
-    <div>
-      <div><strong>EMAIL<br>bluveda.holistic<strong>@gmail.com<br>‍</strong></strong><strong>PHONE<br></strong><a href="tel:+447510139307"><strong class="bold-text-2">07510 139307</strong></a>
+<footer class="section footer-section site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <a href="/" class="site-footer__logo"><img src="/images/bluveda-logo-light.png" width="232" height="179" loading="lazy" alt="BluVeda home"></a>
+        <p class="site-footer__tagline">Yoga, holistic therapies and Ayurvedic yoga massage with Craig Clark, in Dorset and London.</p>
+        <a href="https://www.instagram.com/bluveda/" target="_blank" rel="noopener" class="site-footer__social" aria-label="BluVeda on Instagram">
+          <img src="/images/instagram.svg" width="20" height="20" alt=""><span>@bluveda</span>
+        </a>
+      </div>
+
+      <nav class="site-footer__col" aria-label="Footer">
+        <h2 class="site-footer__heading">Explore</h2>
+        <ul class="site-footer__list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/bridport-wellness-studio">Wellness Studio</a></li>
+          <li><a href="/about">About me</a></li>
+          <li><a href="/ayurvedic-candles">Ayurvedic Candles</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">Sessions</h2>
+        <ul class="site-footer__list">
+          {%- for c in collections.courses | publishedCourses %}
+          <li><a href="/courses/{{ c.data.slug }}">{{ c.data.title }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+
+      <div class="site-footer__col site-footer__contact">
+        <h2 class="site-footer__heading">Get in touch</h2>
+        <ul class="site-footer__list">
+          <li><a href="mailto:bluveda.holistic@gmail.com">bluveda.holistic@gmail.com</a></li>
+          <li><a href="tel:+447510139307">07510 139307</a></li>
+        </ul>
+        <address class="site-footer__address">Four Ashes Cottage<br>Owls Roost<br>Beaminster<br>DT8 3JZ</address>
+        <a href="/contact" class="site-footer__button">Book a session</a>
       </div>
     </div>
-    <div id="w-node-ce10be5e-f237-e926-bcf0-34a552e65c92-2c54b452" class="divinsta">
-      <a href="https://www.instagram.com/bluveda/" target="_blank" class="w-inline-block"><img src="/images/Instagram_icon-1.png" loading="lazy" width="45" alt="" class="image-13"></a>
-    </div>
-    <div class="text-block-65">
-      <a href="https://www.dt-1.co.uk"><strong class="bold-text-5">Site by DT1</strong></a>
+
+    <div class="site-footer__bottom">
+      <p>&copy; {{ year }} BluVeda. All rights reserved.</p>
+      <p><a href="https://www.dt-1.co.uk">Site by DT1</a></p>
     </div>
   </div>
-</div>
+</footer>

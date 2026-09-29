@@ -16,7 +16,7 @@ npm run build    # production build into _site/
 | What | File |
 | --- | --- |
 | Top banner + navigation (including the **MY CALENDAR** timetable image) | `src/_includes/nav.njk` |
-| Footer (email, phone, Instagram) | `src/_includes/footer.njk` |
+| Footer (logo, links, sessions, contact details, Instagram) | `src/_includes/footer.njk` (sessions are listed from the courses automatically; the light logo is `src/images/bluveda-logo-light.png`) |
 | Course cards shown on Home, About, Studio and Candles pages, and under each course page | `src/_includes/course-cards.njk` (styles at the end of `src/css/site.css`) |
 | Course page design (`/courses/...`) | `src/_includes/layouts/course.njk` |
 | Pages | `src/index.njk`, `about.njk`, `contact.njk`, `bridport-wellness-studio.njk`, `ayurvedic-candles.njk`, `404.njk` |

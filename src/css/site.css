@@ -14,12 +14,6 @@
   .course-list-heading { width: 80%; margin-left: auto; margin-right: auto; }
 }
 
-.grid-4 { width: 80%; margin-left: auto; margin-right: auto; }
-
-@media screen and (max-width: 479px) {
-  .grid-4 { width: 90%; }
-}
-
 /* Course cards (src/_includes/course-cards.njk).
    Two or more show in a grid; a single card (on a course page) is centred at the same size.
    Every image is cropped to the same 4:3 shape. */
@@ -183,7 +177,7 @@
   --fs-lead: clamp(18px, 0.3vw + 16px, 21px);    /* intros under a title */
   --fs-body: 17px;                               /* long reading text */
   --fs-text: 16px;                               /* short text blocks */
-  --fs-small: 15px;                              /* cards, footer */
+  --fs-small: 15px;                              /* cards, footer links */
   --fs-label: 13px;                              /* eyebrows, buttons */
   --fs-tiny: 11px;                               /* fine print */
 
@@ -311,9 +305,6 @@ p.heading1specialabout.wellness,
 }
 .course-card__meta dt { font-size: var(--fs-tiny); }
 
-/* Footer */
-.footer-section strong { font-size: var(--fs-small); }
-.footer-section .bold-text-5 { font-size: var(--fs-tiny); }
 
 /* ------------------------------------------------------------------
    Course pages: keep the reading column narrow and centred
@@ -344,4 +335,131 @@ p.heading1specialabout.wellness,
 }
 @media screen and (max-width: 479px) {
   .column.candles > p { width: 90%; }
+}
+
+/* ------------------------------------------------------------------
+   Footer (src/_includes/footer.njk)
+   A deeper shade of the brand sage, so light text reads clearly.
+   ------------------------------------------------------------------ */
+.section.footer-section.site-footer {
+  --footer-bg: #5f5c48;
+  --footer-text: #f4f1e4;
+  --footer-muted: #d9d5c0;
+  --footer-line: #f4f1e426;
+
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 72px 0 0;
+}
+
+.site-footer__inner { width: 80%; margin: 0 auto; }
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  gap: 48px;
+  padding-bottom: 56px;
+}
+
+.site-footer a { color: var(--footer-text); text-decoration: none; transition: color .3s, opacity .3s; }
+.site-footer a:hover { color: #fff; }
+
+.site-footer__logo { display: inline-block; margin-bottom: 20px; }
+.site-footer__logo img { display: block; width: 116px; height: auto; }
+
+.site-footer__tagline {
+  color: var(--footer-muted);
+  max-width: 300px;
+  margin: 0 0 24px;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: 1.7;
+}
+
+.site-footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+}
+.site-footer__social img {
+  width: 20px;
+  height: 20px;
+  padding: 8px;
+  box-sizing: content-box;
+  border: 1px solid var(--footer-line);
+  border-radius: 50%;
+  transition: border-color .3s;
+}
+.site-footer__social:hover img { border-color: var(--footer-text); }
+
+.site-footer__heading {
+  color: var(--footer-muted);
+  margin: 6px 0 20px;
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.site-footer__list { list-style: none; margin: 0; padding: 0; }
+.site-footer__list li { margin-bottom: 10px; }
+.site-footer__list a,
+.site-footer__address {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+.site-footer__list a { overflow-wrap: anywhere; }
+
+.site-footer__address {
+  color: var(--footer-muted);
+  margin: 16px 0 24px;
+  font-style: normal;
+}
+
+.site-footer a.site-footer__button {
+  display: inline-block;
+  color: var(--footer-bg);
+  background-color: var(--footer-text);
+  border-radius: 4px;
+  padding: 12px 22px;
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background-color .3s;
+}
+.site-footer a.site-footer__button:hover { background-color: #fff; color: var(--footer-bg); }
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  border-top: 1px solid var(--footer-line);
+  padding: 24px 0 28px;
+}
+.site-footer__bottom p {
+  color: var(--footer-muted);
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.site-footer__bottom a { color: var(--footer-muted); }
+
+@media screen and (max-width: 991px) {
+  .site-footer__grid { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+}
+
+@media screen and (max-width: 479px) {
+  .section.footer-section.site-footer { padding-top: 48px; }
+  .site-footer__inner { width: 90%; }
+  .site-footer__grid { gap: 36px 24px; padding-bottom: 40px; }
+  .site-footer__brand, .site-footer__contact { grid-column: 1 / -1; }
+  .site-footer__bottom { flex-direction: column; }
 }
