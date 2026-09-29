@@ -3,3 +3,19 @@
 .w-dyn-empty { background-color: #ddd; padding: 10px; }
 
 .netlify-form { margin: 0 0 15px; }
+
+/* Consistent page margins.
+   Most content sits in .hero-slider-content at 80% width (a 10% margin each side),
+   and 5% each side on phones. These bring the pieces that ran wider into line. */
+@media screen and (min-width: 480px) {
+  .hero-slider-content.contact.contatpage { width: 80%; }
+
+  .free-plan-container > .products-list-wrapper { width: 80%; margin-left: auto; margin-right: auto; }
+  .free-plan-container .product-card { width: 100%; }
+}
+
+.grid-4 { width: 80%; margin-left: auto; margin-right: auto; }
+
+@media screen and (max-width: 479px) {
+  .grid-4 { width: 90%; }
+}
