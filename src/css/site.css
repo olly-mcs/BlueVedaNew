@@ -162,3 +162,186 @@
   .course-card__body { padding: 24px; }
   .course-card__title { font-size: 24px; }
 }
+
+/* ------------------------------------------------------------------
+   Type scale
+   One set of sizes for the whole site. Sizes scale smoothly between
+   phone and desktop, so they need no breakpoints.
+     Arvo            headings, labels, buttons, navigation
+     Red Hat Display everything you read
+   Selectors match or beat the Webflow ones they replace, including the
+   ones inside Webflow's media queries.
+   ------------------------------------------------------------------ */
+:root {
+  --font-heading: Arvo, Georgia, serif;
+  --font-body: "Red Hat Display", sans-serif;
+
+  --fs-display: clamp(30px, 1.6vw + 22px, 44px); /* page titles */
+  --fs-h2: clamp(24px, 0.9vw + 19px, 32px);      /* section headings */
+  --fs-h3: clamp(20px, 0.45vw + 17px, 24px);     /* card titles, sub-headings */
+  --fs-h4: 18px;                                 /* small headings in long text */
+  --fs-lead: clamp(18px, 0.3vw + 16px, 21px);    /* intros under a title */
+  --fs-body: 17px;                               /* long reading text */
+  --fs-text: 16px;                               /* short text blocks */
+  --fs-small: 15px;                              /* cards, footer */
+  --fs-label: 13px;                              /* eyebrows, buttons */
+  --fs-tiny: 11px;                               /* fine print */
+
+  --measure: 720px;                              /* comfortable reading width */
+}
+
+/* Display: one title per page */
+.heading1specialabout,
+.heading1specialabout.hptext,
+.heading1specialabout.hptext.main,
+h1.heading1specialabout.wellness,
+.heading-2,
+.paragraph-2.header.candle.mobile,
+.utility-page-content h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Section headings */
+.heading-14 {
+  text-wrap: balance;
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* Sub-headings */
+.heading-8.scentheader,
+.w-richtext h2,
+.w-richtext h3,
+.w-richtext h4 {
+  color: var(--sage);
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  line-height: 1.3;
+}
+.w-richtext h2, .w-richtext h3, .w-richtext h4 { margin: 48px 0 16px; }
+
+.w-richtext h5,
+.w-richtext h6,
+.w-richtext h5 strong,
+.w-richtext h6 strong {
+  color: #555;
+  font-family: var(--font-body);
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  line-height: 1.35;
+}
+.w-richtext h5, .w-richtext h6 { margin: 28px 0 8px; }
+
+.contact-link {
+  font-size: var(--fs-h3);
+  line-height: 1.5;
+}
+
+/* Lead: the intro under a title */
+.big-paragraph,
+.big-paragraph.max-500,
+.big-paragraph.max-500.right,
+.big-paragraph.max-500.below,
+.big-paragraph.max-500.toppara.yogamob,
+.big-paragraph.max-500.mobdesc1,
+.big-paragraph.max-350 {
+  font-family: var(--font-body);
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+}
+p.heading1specialabout.wellness,
+.slidertestimonial {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lead);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Candle price */
+.big-paragraph.max-500 strong { font-size: var(--fs-h3); }
+
+/* Long reading text (About, Studio and course pages) */
+.big-paragraph.max-800.no-margin,
+.w-richtext p {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+}
+.big-paragraph.max-800.no-margin { max-width: var(--measure); }
+.w-richtext p { margin-bottom: 16px; }
+
+/* Short text blocks */
+.paragraph-2,
+.paragraph-2.candledesc,
+.paragraph-3,
+.paragraph.candlehowtouse {
+  font-family: var(--font-body);
+  font-size: var(--fs-text);
+  line-height: 1.75;
+}
+.list-item {
+  font-family: var(--font-body);
+  font-size: var(--fs-text);
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+.course-card__text { font-family: var(--font-body); font-size: var(--fs-small); }
+.course-card__title { font-size: var(--fs-h3); }
+
+/* Labels and buttons */
+.label._30-margin,
+.label._15-margin,
+.course-card__cta {
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  letter-spacing: 2px;
+}
+.button.w-button {
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  letter-spacing: 2px;
+}
+.course-card__meta dt { font-size: var(--fs-tiny); }
+
+/* Footer */
+.footer-section strong { font-size: var(--fs-small); }
+.footer-section .bold-text-5 { font-size: var(--fs-tiny); }
+
+/* ------------------------------------------------------------------
+   Course pages: keep the reading column narrow and centred
+   ------------------------------------------------------------------ */
+.column.coursepage > p,
+.column.coursepage > .label,
+.column.coursepage > .big-paragraph.max-500.toppara.yogamob,
+.column.coursepage > .big-paragraph.max-500.mobdesc1 {
+  width: 100%;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.longdecdiv .big-paragraph.max-800.no-margin {
+  width: 90%;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Candles page intro: same reading column */
+.column.candles > p {
+  width: 100%;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 479px) {
+  .column.candles > p { width: 90%; }
+}

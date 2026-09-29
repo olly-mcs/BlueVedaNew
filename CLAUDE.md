@@ -52,5 +52,6 @@ Email notifications are set up there. `src/js/contact-form.js` sends the form an
 ## Rules for changes
 
 - Keep the Webflow class names and `data-w-id` / `data-wf-page` attributes. `js/webflow.js` uses them for animations and the mobile menu.
+- Font sizes come from the type scale at the top of the "Type scale" block in `src/css/site.css` (`--fs-display`, `--fs-h2`, `--fs-h3`, `--fs-lead`, `--fs-body` and so on). Use those instead of new pixel sizes. Long reading text is capped at `--measure` (720px).
 - Run `npm run build` before committing, and make sure it passes.
 - Commit to `main` with a clear message. Netlify deploys it within about a minute.
