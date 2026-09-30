@@ -33,6 +33,7 @@ The HTML below it is the long description ("Course Description" in Webflow).
 - `moduleDescription`: the intro under the title, also used as the page's meta description
 - `courseTypesOffers`, `duration`, `price`: the hero details. The Duration/Price labels only show when a value is set.
 - `blockDescription`: the text on the course cards
+- `imageRatio` (optional, e.g. `"3 / 4"`): shows the hero, `image2`, `image3` and any `course-inline-image` in the description at one width and crop, so they match
 - `order`: the position in the card lists
 - `draft: true`: kept in the repo but not published
 

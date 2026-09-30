@@ -26,7 +26,7 @@
   <link href="/images/favicon.png" rel="shortcut icon" type="image/x-icon">
   <link href="/images/webclip.webp" rel="apple-touch-icon">
 </head>
-<body>
+<body{% if imageRatio %} class="course-uniform-images" style="--course-image-ratio: {{ imageRatio }}"{% endif %}>
   <div class="section-2">
     <div class="div-block-3">
       <div class="text-block-64">YOGA • HEALING • INNER HARMONY</div>
