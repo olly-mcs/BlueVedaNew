@@ -1,17 +1,29 @@
-{%- set items = collections.courses | publishedCourses -%}
+{#- Course cards. Shows every published course, or set `cardCourses` before including to pass your own list. -#}
+{%- set items = cardCourses if cardCourses is defined else (collections.courses | publishedCourses) -%}
 <div class="products-list-wrapper w-dyn-list">
-  <div role="list" class="product-list hplist w-dyn-items">
+  <div role="list" class="product-list course-list{{ ' course-list--single' if items.length == 1 }} w-dyn-items">
     {%- for c in items %}
-    <div id="w-node-_19ddf4d1-f9ab-8dae-c19a-81d10fb8a260-0fb8a25c" role="listitem" class="product-item w-dyn-item">
-      <a href="/courses/{{ c.data.slug }}" class="product-card w-inline-block"><img src="{{ c.data.image }}" loading="lazy" alt="" class="image-12{{ ' w-dyn-bind-empty' if not c.data.image }}">
-        <div class="product-description _2column">
-          <div>
-            <div class="label _15-margin sessionlength">SESSION LENGTH</div>
-            <div class="label _15-margin{{ ' w-dyn-bind-empty' if not c.data.duration }}">{{ c.data.duration }}</div>
-            <h5 class="heading-3 mobileblocks">{{ c.data.title }}</h5>
-            <div class="text-block-3{{ ' w-dyn-bind-empty' if not c.data.blockDescription }}">{{ c.data.blockDescription }}</div>
-          </div>
-          <div class="link">Book a session</div>
+    <div role="listitem" class="product-item course-card-item w-dyn-item">
+      <a href="/courses/{{ c.data.slug }}" class="product-card course-card w-inline-block">
+        <div class="course-card__media">
+          {%- if c.data.image %}<img src="{{ c.data.image }}" loading="lazy" alt="{{ c.data.title }}" class="course-card__image">{% endif -%}
+        </div>
+        <div class="course-card__body">
+          {%- if c.data.duration or c.data.price %}
+          <dl class="course-card__meta">
+            {%- if c.data.duration %}
+            <div><dt>Session length</dt><dd>{{ c.data.duration }}</dd></div>
+            {%- endif %}
+            {%- if c.data.price %}
+            <div><dt>Price</dt><dd>{{ c.data.price }}</dd></div>
+            {%- endif %}
+          </dl>
+          {%- endif %}
+          <h3 class="course-card__title">{{ c.data.title }}</h3>
+          {%- if c.data.blockDescription %}
+          <p class="course-card__text">{{ c.data.blockDescription }}</p>
+          {%- endif %}
+          <span class="course-card__cta">Book a session</span>
         </div>
       </a>
     </div>

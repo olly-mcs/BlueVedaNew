@@ -16,8 +16,8 @@ npm run build    # production build into _site/
 | What | File |
 | --- | --- |
 | Top banner + navigation (including the **MY CALENDAR** timetable image) | `src/_includes/nav.njk` |
-| Footer (email, phone, Instagram) | `src/_includes/footer.njk` |
-| Course cards shown on Home, About, Studio and Candles pages | `src/_includes/course-cards.njk` |
+| Footer (logo, links, sessions, contact details, Instagram) | `src/_includes/footer.njk` (sessions are listed from the courses automatically; the light logo is `src/images/bluveda-logo-light.png`) |
+| Course cards shown on Home, About, Studio and Candles pages, and under each course page | `src/_includes/course-cards.njk` (styles at the end of `src/css/site.css`) |
 | Course page design (`/courses/...`) | `src/_includes/layouts/course.njk` |
 | Pages | `src/index.njk`, `about.njk`, `contact.njk`, `bridport-wellness-studio.njk`, `ayurvedic-candles.njk`, `404.njk` |
 | Styles | `src/css/blue-veda.webflow.css` (Webflow export), `src/css/site.css` (our additions) |
@@ -52,5 +52,6 @@ Email notifications are set up there. `src/js/contact-form.js` sends the form an
 ## Rules for changes
 
 - Keep the Webflow class names and `data-w-id` / `data-wf-page` attributes. `js/webflow.js` uses them for animations and the mobile menu.
+- Font sizes come from the type scale at the top of the "Type scale" block in `src/css/site.css` (`--fs-display`, `--fs-h2`, `--fs-h3`, `--fs-lead`, `--fs-body` and so on). Use those instead of new pixel sizes. Long reading text is capped at `--measure` (720px).
 - Run `npm run build` before committing, and make sure it passes.
 - Commit to `main` with a clear message. Netlify deploys it within about a minute.
