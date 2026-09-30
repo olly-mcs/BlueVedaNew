@@ -8,6 +8,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("publishedCourses", (items = []) =>
     items.filter((c) => !c.data.draft).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
   );
+  // The live address, for links that must be absolute (social sharing images)
+  eleventyConfig.addGlobalData("siteUrl", "https://www.bluveda.guru");
+
   // For the footer copyright line
   eleventyConfig.addGlobalData("year", () => new Date().getFullYear());
 

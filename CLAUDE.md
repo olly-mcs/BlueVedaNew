@@ -46,7 +46,7 @@ Email notifications are set up there. `src/js/contact-form.js` sends the form an
 ## Notes from the Webflow move
 
 - Webflow's unused ecommerce and blog template pages were left out.
-- Course images are still loaded from Webflow's CDN (`cdn.prod.website-files.com`). Move them into `src/images/` before the Webflow site is deleted.
+- All images are now hosted with the site. Course images live in `src/images/courses/`; nothing loads from Webflow's CDN any more.
 - jQuery is now hosted with the site (`src/js/jquery-3.5.1.min.js`), the same file Webflow used.
 
 ## Rules for changes
