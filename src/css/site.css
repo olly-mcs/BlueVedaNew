@@ -575,3 +575,24 @@ p.heading1specialabout.wellness,
   .testimonials-card .w-slider-arrow-left,
   .testimonials-card .w-slider-arrow-right { display: none; }
 }
+
+/* Course pages with `imageRatio` set: every photo at one width and crop */
+.course-uniform-images .main-prod-image,
+.course-uniform-images .second-image,
+.course-uniform-images .course-inline-image {
+  display: block;
+  width: min(560px, 90%);
+  height: auto;
+  aspect-ratio: var(--course-image-ratio);
+  object-fit: cover;
+  border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.w-richtext img.course-inline-image {
+  width: min(560px, 100%);
+  margin-top: 48px;
+  margin-bottom: 8px;
+}
+/* The hero sits in a column that is already inset on phones */
+.course-uniform-images .column.coursepage .main-prod-image { width: min(560px, 100%); }
