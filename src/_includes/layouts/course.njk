@@ -6,10 +6,10 @@
   <meta content="{{ moduleDescription }}" name="description">
   <meta content="{{ title }} - Blu Veda" property="og:title">
   <meta content="{{ moduleDescription }}" property="og:description">
-  <meta content="{{ image }}" property="og:image">
+  <meta content="{{ siteUrl + image if image.startsWith('/') else image }}" property="og:image">
   <meta content="{{ title }} - Blu Veda" name="twitter:title">
   <meta content="{{ moduleDescription }}" name="twitter:description">
-  <meta content="{{ image }}" name="twitter:image">
+  <meta content="{{ siteUrl + image if image.startsWith('/') else image }}" name="twitter:image">
   <meta property="og:type" content="website">
   <meta content="summary_large_image" name="twitter:card">
   <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -55,7 +55,7 @@
     </div>
   </div>
   <div class="section about-hero">
-    <div class="container"><img alt="" loading="lazy" width="373" src="{{ image3 }}" class="main-prod-image image3{{ ' w-dyn-bind-empty' if not image3 }}"></div>
+    <div class="container">{% if image3 %}<img alt="" loading="lazy" width="373" src="{{ image3 }}" class="main-prod-image image3">{% endif %}</div>
     <div class="longdecdiv">
       <div data-duration-in="300" data-duration-out="100" data-current="Tab 1" data-easing="ease" class="w-tabs">
         <div class="w-tab-content">
