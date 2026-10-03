@@ -42,7 +42,28 @@
 
     <div class="site-footer__bottom">
       <p>&copy; {{ year }} BluVeda. All rights reserved.</p>
+      <p>Sound bath: <a href="https://commons.wikimedia.org/wiki/File:Cuencos_tibetanos_al_ser_percutidos.wav" target="_blank" rel="noopener">&ldquo;Cuencos tibetanos al ser percutidos&rdquo;</a> by Luis Alvaz, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>
       <p><a href="https://www.dt-1.co.uk">Site by DT1</a></p>
     </div>
   </div>
 </footer>
+
+{#- Sticky sound bath player. Behaviour in /js/sound-bath.js, styles in site.css. #}
+<div class="sound-player" data-src="/audio/sound-bath.mp3" role="region" aria-label="Sound bath">
+  <button type="button" class="sound-player__btn sound-player__play" aria-label="Play sound bath" aria-pressed="false">
+    <svg class="sound-player__icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+    <svg class="sound-player__icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3v13h-3zM13.5 5.5h3v13h-3z"/></svg>
+  </button>
+  <button type="button" class="sound-player__btn sound-player__stop" aria-label="Stop sound bath">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>
+  </button>
+  <div class="sound-player__volume">
+    <button type="button" class="sound-player__btn sound-player__vol-toggle" aria-label="Volume" aria-expanded="false" aria-controls="sound-player-volume">
+      <svg class="sound-player__icon-vol" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="sound-player__waves" d="M15 9a4 4 0 0 1 0 6M17.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <div class="sound-player__slider" id="sound-player-volume">
+      <input type="range" min="0" max="100" value="40" aria-label="Sound bath volume">
+    </div>
+  </div>
+</div>
+<script src="/js/sound-bath.js" defer></script>

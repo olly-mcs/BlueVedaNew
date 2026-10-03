@@ -1,6 +1,6 @@
 export default function (eleventyConfig) {
   // Static assets exported from Webflow, copied as-is
-  for (const dir of ["css", "js", "images", "fonts"]) {
+  for (const dir of ["css", "js", "images", "fonts", "audio"]) {
     eleventyConfig.addPassthroughCopy(`src/${dir}`);
   }
 

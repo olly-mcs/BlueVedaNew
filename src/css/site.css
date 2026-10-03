@@ -1170,3 +1170,91 @@ body { --course-photo-w: 480px; }
    ------------------------------------------------------------------ */
 .utility-page-content h2 { color: var(--sage); }
 .utility-page-content p { color: var(--textgrey); }
+
+/* ------------------------------------------------------------------
+   Sound bath player (src/_includes/footer.njk, src/js/sound-bath.js)
+   A small sage pill fixed to the right edge: mid-height on desktop,
+   lower right on phones so it stays clear of the text.
+   ------------------------------------------------------------------ */
+.sound-player {
+  position: fixed;
+  z-index: 1000;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+  background-color: var(--sage);
+  border-radius: 999px;
+  box-shadow: 0 6px 24px #0000002e;
+}
+.sound-player__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.sound-player__btn:hover { background-color: #ffffff26; }
+.sound-player__btn:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.sound-player__btn svg { width: 22px; height: 22px; fill: currentColor; }
+
+.sound-player__icon-pause { display: none; }
+.sound-player.is-playing .sound-player__icon-play { display: none; }
+.sound-player.is-playing .sound-player__icon-pause { display: block; }
+.sound-player.is-muted .sound-player__waves { display: none; }
+
+/* A soft ring while playing */
+.sound-player.is-playing .sound-player__play { box-shadow: 0 0 0 2px #ffffff59; }
+
+/* Volume slider opens to the left of the pill */
+.sound-player__volume { position: relative; }
+.sound-player__slider {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  align-items: center;
+  height: 44px;
+  padding: 0 16px;
+  background-color: var(--sage);
+  border-radius: 999px;
+  box-shadow: 0 6px 24px #0000002e;
+}
+.sound-player.is-volume-open .sound-player__slider { display: flex; }
+@media (hover: hover) {
+  .sound-player__volume:hover .sound-player__slider,
+  .sound-player__volume:focus-within .sound-player__slider { display: flex; }
+}
+.sound-player__slider input {
+  width: 120px;
+  margin: 0;
+  accent-color: #fff;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .sound-player {
+    top: auto;
+    bottom: 20px;
+    right: 12px;
+    transform: none;
+    padding: 4px;
+  }
+  .sound-player__btn { width: 38px; height: 38px; }
+}
+
+@media print {
+  .sound-player { display: none; }
+}

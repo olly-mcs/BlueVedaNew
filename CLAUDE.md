@@ -22,6 +22,7 @@ npm run build    # production build into _site/
 | Pages | `src/index.njk`, `about.njk`, `contact.njk`, `bridport-wellness-studio.njk`, `ayurvedic-candles.njk`, `404.njk` |
 | Styles | `src/css/blue-veda.webflow.css` (Webflow export), `src/css/site.css` (our additions) |
 | Images | `src/images/` |
+| Sound bath player (sticky on every page with a footer) | Markup at the end of `src/_includes/footer.njk`, behaviour in `src/js/sound-bath.js`, styles at the end of `src/css/site.css`, audio in `src/audio/sound-bath.mp3` |
 
 ## Courses (formerly the Webflow "Courses" CMS collection)
 
@@ -68,6 +69,16 @@ To add a course, copy an existing file, give it a new `slug`, and link it from `
 
 The contact form uses **Netlify Forms** (form name `contact`). Submissions appear in the Netlify dashboard under *Forms*.
 Email notifications are set up there. `src/js/contact-form.js` sends the form and shows the thank-you message.
+
+## Sound bath audio
+
+`src/audio/sound-bath.mp3` is "Cuencos tibetanos al ser percutidos" by Luis Alvaz, from
+[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cuencos_tibetanos_al_ser_percutidos.wav),
+licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). It was converted from WAV to MP3 (96 kbps) with no other changes.
+The licence requires the credit in the footer's bottom bar; keep it if the track stays. If you swap the track, update the credit to match.
+
+Browsers block sound until the visitor interacts with the page, so it starts on the first click or tap,
+then resumes from the same spot on later pages. Pausing or stopping is remembered.
 
 ## Notes from the Webflow move
 
