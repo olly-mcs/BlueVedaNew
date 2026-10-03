@@ -39,32 +39,41 @@ nav: contact
     <div class="container">
       <div class="hero-slider-content contact contatpage">
         <div id="w-node-f2bd7fdc-a738-1450-b4f9-1b53880bc1f6-4b3a01d6" class="column aboutuscolumn">
-          <div class="label _30-margin">BOOK A SESSION OR ENQUIRE ABOUT MY OFFERINGS<br></div>
+          <div class="label _30-margin">Book a session or enquire</div>
           <h1 class="heading-2">Connect with your inner well-being.</h1>
           <p class="big-paragraph max-500 right">Fill out the form below to start your organic path to wellness.</p>
           <p class="big-paragraph max-500 below">Fill out the form below to start your organic path to wellness.</p>
-          <div class="label _15-margin">Email</div>
-          <a href="#" class="contact-link">bluveda.holistic@gmail.com</a>
-          <div class="_30px-spacer"></div>
-          <div class="label _15-margin">Phone</div>
-          <a href="#" class="contact-link">07510 139307</a>
-          <div class="_30px-spacer"></div>
-          <div class="label _15-margin">ADDRESS</div>
-          <a href="#" class="contact-link">Four Ashes Cottage <br>Owls Roost <br>Beaminster <br>DT8 3JZ</a>
-          <div><img src="/images/Screenshot-2023-10-11-at-11.29.14.png" loading="lazy" width="486" sizes="(max-width: 479px) 100vw, (max-width: 767px) 57vw, (max-width: 991px) 44vw, 38vw" alt="" srcset="/images/Screenshot-2023-10-11-at-11.29.14-p-500.png 500w, /images/Screenshot-2023-10-11-at-11.29.14-p-800.png 800w, /images/Screenshot-2023-10-11-at-11.29.14-p-1080.png 1080w, /images/Screenshot-2023-10-11-at-11.29.14.png 1280w" class="image-8"></div>
+          <dl class="contact-details">
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:bluveda.holistic@gmail.com" class="contact-link">bluveda.holistic@gmail.com</a></dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd><a href="tel:+447510139307" class="contact-link">07510 139307</a></dd>
+            </div>
+            <div>
+              <dt>Studio</dt>
+              <dd><address class="contact-address">Four Ashes Cottage<br>Owls Roost<br>Beaminster<br>DT8 3JZ</address></dd>
+            </div>
+          </dl>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Four+Ashes+Cottage+Owls+Roost+Beaminster+DT8+3JZ" target="_blank" rel="noopener" class="contact-map"><img src="/images/Screenshot-2023-10-11-at-11.29.14.png" loading="lazy" width="486" sizes="(max-width: 479px) 100vw, (max-width: 767px) 57vw, (max-width: 991px) 44vw, 38vw" alt="Map showing the BluVeda studio near Beaminster" srcset="/images/Screenshot-2023-10-11-at-11.29.14-p-500.png 500w, /images/Screenshot-2023-10-11-at-11.29.14-p-800.png 800w, /images/Screenshot-2023-10-11-at-11.29.14-p-1080.png 1080w, /images/Screenshot-2023-10-11-at-11.29.14.png 1280w" class="image-8 contact-map__image"><span>Open in Google Maps</span></a>
         </div>
         <div id="w-node-aa2731c4-ac7b-fa72-caa7-5b2b0a16254a-4b3a01d6" class="contact-form netlify-form">
           <form id="email-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form-content">
             <input type="hidden" name="form-name" value="contact">
             <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
-            <div class="contact-form-grid"><input class="form-field w-input" maxlength="256" name="Firstname" data-name="Firstname" placeholder="First Name" type="text" id="Firstname" required=""><input class="form-field w-input" maxlength="256" name="Last-Name" data-name="Last Name" placeholder="Last Name" type="text" id="Last-Name" required=""><input class="form-field w-input" maxlength="256" name="Email-Address" data-name="Email Address" placeholder="Email Address" type="email" id="Email-Address" required=""><select id="What-service-s-do-you-require" name="What-service-s-do-you-require" required="" data-name="What service(s) do you require?" multiple="" class="form-field w-select">
-                <option value="General Enquiry">General Enquiry</option>
-                <option value="Yoga">Yoga</option>
-                <option value="Healing">Healing</option>
-                <option value="Vibroacoustic Massage">Vibroacoustic Massage</option>
-                <option value="‍Swedish / Holistic massage">‍Swedish / Holistic massage</option>
-                <option value="Ayurvedic yoga massage">Ayurvedic yoga massage</option>
-                <option value="Deep tissue massage">Deep tissue massage</option>
+            <div class="contact-form-grid"><input class="form-field w-input" maxlength="256" name="Firstname" data-name="Firstname" placeholder="First Name" type="text" id="Firstname" required=""><input class="form-field w-input" maxlength="256" name="Last-Name" data-name="Last Name" placeholder="Last Name" type="text" id="Last-Name" required=""><input class="form-field w-input" maxlength="256" name="Email-Address" data-name="Email Address" placeholder="Email Address" type="email" id="Email-Address" required=""><select id="What-service-s-do-you-require" name="What-service-s-do-you-require" required="" data-name="What service(s) do you require?" class="form-field w-select">
+                <option value="" disabled selected>What would you like to book?</option>
+                <option value="General enquiry">General enquiry</option>
+                {%- for c in collections.courses | publishedCourses %}
+                <optgroup label="{{ c.data.title }}">
+                  {%- for group in c.data.serviceGroups %}{% for service in group.services %}
+                  <option value="{{ service.name }}">{{ service.name }}</option>
+                  {%- endfor %}{% endfor %}
+                </optgroup>
+                {%- endfor %}
+                <option value="Ayurvedic candles">Ayurvedic candles</option>
               </select><textarea placeholder="Whether you want to book a session with me, or find out more about the services I offer, just message me directly and I&#x27;ll be in contact as soon as I can. Typically within 24 hours" maxlength="5000" id="Tell-me-more-about-yourself" name="Tell-me-more-about-yourself" data-name="Tell me more about yourself" required="" class="text-area w-node-_8c6a0f55-9940-658b-7324-98313b6aa3d7-4b3a01d6 w-input"></textarea><input type="submit" data-wait="Please wait..." id="w-node-aa2731c4-ac7b-fa72-caa7-5b2b0a162553-4b3a01d6" class="button mob w-button" value="Get in touch"></div>
           </form>
           <div class="sucess-message w-form-done">

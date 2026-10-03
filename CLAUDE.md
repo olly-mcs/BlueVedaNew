@@ -26,16 +26,41 @@ npm run build    # production build into _site/
 ## Courses (formerly the Webflow "Courses" CMS collection)
 
 Each course is a file in `src/courses/`. The front matter holds the fields.
-The HTML below it is the long description ("Course Description" in Webflow).
+The HTML below it is the intro copy, shown above the services.
 
 - `title`, `slug`: the name and URL (`/courses/<slug>`)
-- `image`: the hero image and card image. `image3` is the second image beside the description. `image2` goes below the description.
+- `image`: the hero image and card image. `image3` goes after the intro copy, `image2` after the services.
 - `moduleDescription`: the intro under the title, also used as the page's meta description
-- `courseTypesOffers`, `duration`, `price`: the hero details. The Duration/Price labels only show when a value is set.
+- `courseTypesOffers`, `duration`, `price`: the hero details. Duration/Price only show when set; they also appear on the course cards.
 - `blockDescription`: the text on the course cards
-- `imageRatio` (optional, e.g. `"3 / 4"`): shows the hero, `image2`, `image3` and any `course-inline-image` in the description at one width and crop, so they match
+- `imageRatio` (optional, e.g. `"3 / 4"`): gives every photo on the page the same crop
 - `order`: the position in the card lists
 - `draft: true`: kept in the repo but not published
+
+### Services (treatments and classes)
+
+Services are data, so every one is laid out the same way: name and price on one line, duration under the price, then the description.
+
+```yaml
+servicesTitle: "Classes"          # label above the list (default "Treatments")
+servicesIntro: "One-line intro."  # optional
+serviceGroups:
+  - title: "Massage & Bodywork"
+    subtitle: "To restore movement and support the body's natural ability to rebalance"
+    image: "/images/courses/holistic-hand-massage.jpg"   # optional photo above the group
+    imageAlt: "Oiled hands massaging a client's hand"
+    services:
+      - name: "Swedish Massage"           # title case, no trailing colon
+        subtitle: "Ayurvedic oil massage" # optional
+        price: "From £60"                 # always "From £00"; leave out if on enquiry
+        duration: "60 or 90 mins"         # optional; "60 mins", "90 mins", "60 or 90 mins"
+        description:
+          - "First paragraph."
+          - "Second paragraph."
+```
+
+`ctaTitle`, `ctaText` and `ctaButton` set the closing "book a session" block (defaults: "Ready to book a session?" / "Book a session").
+The contact form's "What would you like to book?" list is built from these services automatically.
 
 To add a course, copy an existing file, give it a new `slug`, and link it from `nav.njk` if needed.
 
@@ -53,6 +78,7 @@ Email notifications are set up there. `src/js/contact-form.js` sends the form an
 ## Rules for changes
 
 - Keep the Webflow class names and `data-w-id` / `data-wf-page` attributes. `js/webflow.js` uses them for animations and the mobile menu.
+- Pages are built from shared blocks in `src/css/site.css`: `page-intro` (photo beside the title), `page-story` (long text in the reading column) and `page-cta` (closing booking block). Reuse them for new pages. All buttons share one style (`.button.w-button`).
 - Font sizes come from the type scale at the top of the "Type scale" block in `src/css/site.css` (`--fs-display`, `--fs-h2`, `--fs-h3`, `--fs-lead`, `--fs-body` and so on). Use those instead of new pixel sizes. Long reading text is capped at `--measure` (720px).
 - Run `npm run build` before committing, and make sure it passes.
 - Commit to `main` with a clear message. Netlify deploys it within about a minute.

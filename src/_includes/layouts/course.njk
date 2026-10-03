@@ -33,40 +33,100 @@
     </div>
   </div>
   {% include "nav.njk" %}
-  <div class="section about-hero">
-    <div class="container">
-      <div class="hero-slider-content">
-        <div id="w-node-_950ca9bf-e72e-ebb2-486f-50d28895ff55-fe3a01d2" class="column coursepage">
-          <div class="label _30-margin">YOGA • HEALING • INNER HARMONY<br></div>
-          <h1 class="heading1specialabout">{{ title }}</h1><img alt="" loading="lazy" width="373" src="{{ image }}" class="main-prod-image{{ ' w-dyn-bind-empty' if not image }}">
-          <p class="heading1specialabout wellness{{ ' w-dyn-bind-empty' if not moduleDescription }}">{{ moduleDescription }}</p>
-          <p class="big-paragraph max-500 toppara yogamob{{ ' w-dyn-bind-empty' if not courseTypesOffers }}">{{ courseTypesOffers }}</p>
-          {%- if duration %}
-          <div class="label _30-margin price">Duration<br></div>
-          {%- endif %}
-          <p class="big-paragraph max-500 mobdesc1{{ ' w-dyn-bind-empty' if not duration }}">{{ duration }}</p>
-          {%- if price %}
-          <div class="label _30-margin price">Price<br></div>
-          {%- endif %}
-          <p class="big-paragraph max-500 mobdesc1{{ ' w-dyn-bind-empty' if not price }}">{{ price }}</p>
-          <a href="/contact" class="button mob sessionbooking coursesbutton w-button">BOOK A SESSION</a>
-        </div>
+  <div class="section about-hero page-intro page-intro--course">
+    <div class="page-intro__grid">
+      <div class="page-intro__media">
+        {%- if image %}<img src="{{ image }}" width="480" alt="{{ title }}" class="course-photo course-photo--hero">{% endif %}
+      </div>
+      <div class="page-intro__content">
+        <div class="label _30-margin">Yoga &bull; Healing &bull; Inner harmony</div>
+        <h1 class="heading1specialabout page-intro__title">{{ title }}</h1>
+        {%- if moduleDescription %}
+        <p class="page-intro__lead page-intro__lead--accent">{{ moduleDescription }}</p>
+        {%- endif %}
+        {%- if courseTypesOffers %}
+        <p class="page-intro__text">{{ courseTypesOffers }}</p>
+        {%- endif %}
+        {%- if duration or price %}
+        <dl class="course-facts">
+          {%- if duration %}<div><dt>Duration</dt><dd>{{ duration }}</dd></div>{% endif %}
+          {%- if price %}<div><dt>Price</dt><dd>{{ price }}</dd></div>{% endif %}
+        </dl>
+        {%- endif %}
+        <a href="/contact" class="button page-intro__button w-button">Book a session</a>
       </div>
     </div>
   </div>
-  <div class="section about-hero">
-    <div class="container">{% if image3 %}<img alt="" loading="lazy" width="373" src="{{ image3 }}" class="main-prod-image image3">{% endif %}</div>
-    <div class="longdecdiv">
-      <div data-duration-in="300" data-duration-out="100" data-current="Tab 1" data-easing="ease" class="w-tabs">
-        <div class="w-tab-content">
-          <div data-w-tab="Tab 2" class="w-tab-pane"></div>
-        </div>
-      </div>
-      <div class="big-paragraph max-800 no-margin w-richtext">
+
+  <div class="section course-body">
+    <div class="course-body__inner">
+      {%- if content | trim %}
+      <div class="course-body__copy w-richtext">
 {{ content | safe }}
-      </div><img src="{{ image2 }}" loading="lazy" alt="" class="second-image{{ ' w-dyn-bind-empty' if not image2 }}">
+      </div>
+      {%- endif %}
+      {%- if image3 %}
+      <img src="{{ image3 }}" loading="lazy" width="480" alt="" class="course-photo">
+      {%- endif %}
+
+      {%- if serviceGroups %}
+      <div class="services">
+        <div class="services__header">
+          <div class="label _30-margin">{{ servicesTitle or "Treatments" }}</div>
+          {%- if servicesIntro %}
+          <p class="services__intro">{{ servicesIntro }}</p>
+          {%- endif %}
+        </div>
+        {%- for group in serviceGroups %}
+        {%- if group.image %}
+        <img src="{{ group.image }}" loading="lazy" width="480" alt="{{ group.imageAlt }}" class="course-photo">
+        {%- endif %}
+        <section class="service-group">
+          <h2 class="service-group__title">{{ group.title }}</h2>
+          {%- if group.subtitle %}
+          <p class="service-group__subtitle">{{ group.subtitle }}</p>
+          {%- endif %}
+          <div class="service-list">
+            {%- for service in group.services %}
+            <article class="service">
+              <div class="service__header">
+                <div class="service__name-wrap">
+                  <h3 class="service__name">{{ service.name }}</h3>
+                  {%- if service.subtitle %}
+                  <p class="service__subtitle">{{ service.subtitle }}</p>
+                  {%- endif %}
+                </div>
+                {%- if service.price or service.duration %}
+                <div class="service__meta">
+                  {%- if service.price %}<span class="service__price">{{ service.price }}</span>{% endif %}
+                  {%- if service.duration %}<span class="service__duration">{{ service.duration }}</span>{% endif %}
+                </div>
+                {%- endif %}
+              </div>
+              {%- for paragraph in service.description %}
+              <p class="service__text">{{ paragraph }}</p>
+              {%- endfor %}
+            </article>
+            {%- endfor %}
+          </div>
+        </section>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+
+      {%- if image2 %}
+      <img src="{{ image2 }}" loading="lazy" width="480" alt="" class="course-photo">
+      {%- endif %}
     </div>
-    <a href="/contact" class="button mobile w-button">BOOK A SESSION</a>
+  </div>
+
+  <div class="section page-cta">
+    <div class="label _30-margin">Work with me</div>
+    <h2 class="heading-14 page-cta__title">{{ ctaTitle or "Ready to book a session?" }}</h2>
+    {%- if ctaText %}
+    <p class="page-cta__text">{{ ctaText }}</p>
+    {%- endif %}
+    <a href="/contact" class="button page-cta__button w-button">{{ ctaButton or "Book a session" }}</a>
   </div>
   <div class="page-wrap">
     <div data-w-id="82132cc5-094e-04d8-bf08-ac350a8660df" class="section free-classes">
