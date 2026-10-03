@@ -1,35 +1,49 @@
-# Temporary: look up openly licensed sound bath recordings. Deleted after use.
+# Temporary: inspect candidate sound bath recordings. Deleted after use.
 name: Find sound bath audio
 on:
   push:
     branches: [claude/intelligent-meitner-9txxo3]
     paths: [.github/workflows/find-sound-bath.yml]
 jobs:
-  search:
+  inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Wikimedia Commons
+      - name: Archive.org item details
         run: |
-          for q in "singing bowl" "tibetan bowl" "sound bath" "crystal bowl" "gong bath" "meditation bowl"; do
-            echo "=== Commons: $q"
-            curl -s -A "BluVedaSiteBot/1.0 (olly@madeclearstudios.com)" "https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=30&gsrsearch=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]+' filetype:audio'))" "$q")&prop=imageinfo&iiprop=url|size|extmetadata|mediatype&iiextmetadatafilter=LicenseShortName|Artist|ImageDescription" \
-            | python3 -c "
+          for id in CrystalBowlMeditation5.24.17 sw-library-5-16-22 sw-live-7-11-26 CBLive11.7.17Set1; do
+            echo "=== $id"
+            curl -s "https://archive.org/metadata/$id" | python3 -c "
           import json,sys,re
-          d=json.load(sys.stdin)
-          for p in (d.get('query',{}).get('pages',{}) or {}).values():
-              ii=p.get('imageinfo',[{}])[0]; m=ii.get('extmetadata',{})
-              g=lambda k: re.sub('<[^>]+>','',m.get(k,{}).get('value',''))[:90]
-              print(f\"{ii.get('duration',0) or 0:>7.0f}s | {g('LicenseShortName'):<14} | {p['title']} | {ii.get('url')} | {g('Artist')}\")
+          d=json.load(sys.stdin); m=d.get('metadata',{})
+          print('title:',m.get('title')); print('license:',m.get('licenseurl'))
+          print('desc:',re.sub('<[^>]+>',' ',str(m.get('description')))[:700])
+          for f in d.get('files',[]):
+              if f['name'].lower().endswith(('.mp3','.ogg','.flac','.wav')):
+                  print('  file:',f['name'],'| len',f.get('length'),'| size',f.get('size'),'| fmt',f.get('format'))
           "
           done
-      - name: Internet Archive
+      - name: Commons file details
         run: |
-          for q in 'singing bowls' 'sound bath' 'tibetan bowls' 'crystal singing bowls'; do
-            echo "=== Archive: $q"
-            curl -s "https://archive.org/advancedsearch.php?q=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote('(\"'+sys.argv[1]+'\") AND mediatype:audio AND licenseurl:*'))" "$q")&fl[]=identifier&fl[]=title&fl[]=licenseurl&fl[]=creator&rows=40&output=json" \
-            | python3 -c "
-          import json,sys
-          for x in json.load(sys.stdin)['response']['docs']:
-              print(x.get('licenseurl'),'|',x['identifier'],'|',str(x.get('title'))[:80],'|',x.get('creator'))
+          curl -s -A "BluVedaSiteBot/1.0 (olly@madeclearstudios.com)" "https://commons.wikimedia.org/w/api.php?action=query&format=json&titles=File:Cuencos_tibetanos_al_ser_percutidos.wav|File:Himalayan_Atmosphere_(ISRC_USUAN1100204).mp3&prop=imageinfo&iiprop=url|size|extmetadata" | python3 -c "
+          import json,sys,re
+          for p in json.load(sys.stdin)['query']['pages'].values():
+              ii=p['imageinfo'][0]; m=ii['extmetadata']
+              print('===',p['title'], ii.get('size'), 'bytes', ii.get('duration'))
+              for k in ['LicenseShortName','LicenseUrl','Artist','Credit','ImageDescription','AttributionRequired']:
+                  print(' ',k,':',re.sub('<[^>]+>',' ',m.get(k,{}).get('value',''))[:400])
           "
+      - name: Loudness and silence profile
+        run: |
+          sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y ffmpeg >/dev/null
+          curl -sL -A "BluVedaSiteBot/1.0" -o commons.wav "https://upload.wikimedia.org/wikipedia/commons/3/34/Cuencos_tibetanos_al_ser_percutidos.wav"
+          ffprobe -hide_banner commons.wav 2>&1 | grep -E 'Duration|Stream'
+          echo "--- loudness per 60s (mean dB):"
+          for t in $(seq 0 60 960); do printf "%4ss " $t; ffmpeg -hide_banner -ss $t -t 60 -i commons.wav -af volumedetect -f null - 2>&1 | grep -oE 'mean_volume: [-0-9.]+ dB' ; done
+          echo "--- silences over 4s:"
+          ffmpeg -hide_banner -i commons.wav -af silencedetect=n=-50dB:d=4 -f null - 2>&1 | grep -E 'silence_(start|end)' | head -20
+          for id in CrystalBowlMeditation5.24.17; do
+            f=$(curl -s "https://archive.org/metadata/$id" | python3 -c "import json,sys;print([x['name'] for x in json.load(sys.stdin)['files'] if x['name'].lower().endswith('.mp3')][0])")
+            curl -sL -o a.mp3 "https://archive.org/download/$id/$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$f")"
+            echo "=== $id: $f"; ffprobe -hide_banner a.mp3 2>&1 | grep -E 'Duration|Stream'
+            for t in $(seq 0 120 1800); do printf "%4ss " $t; ffmpeg -hide_banner -ss $t -t 60 -i a.mp3 -af volumedetect -f null - 2>&1 | grep -oE 'mean_volume: [-0-9.]+ dB' ; done
           done
