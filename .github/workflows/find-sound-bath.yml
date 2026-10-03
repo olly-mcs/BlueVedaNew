@@ -1,0 +1,35 @@
+# Temporary: look up openly licensed sound bath recordings. Deleted after use.
+name: Find sound bath audio
+on:
+  push:
+    branches: [claude/intelligent-meitner-9txxo3]
+    paths: [.github/workflows/find-sound-bath.yml]
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wikimedia Commons
+        run: |
+          for q in "singing bowl" "tibetan bowl" "sound bath" "crystal bowl" "gong bath" "meditation bowl"; do
+            echo "=== Commons: $q"
+            curl -s -A "BluVedaSiteBot/1.0 (olly@madeclearstudios.com)" "https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=30&gsrsearch=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]+' filetype:audio'))" "$q")&prop=imageinfo&iiprop=url|size|extmetadata|mediatype&iiextmetadatafilter=LicenseShortName|Artist|ImageDescription" \
+            | python3 -c "
+          import json,sys,re
+          d=json.load(sys.stdin)
+          for p in (d.get('query',{}).get('pages',{}) or {}).values():
+              ii=p.get('imageinfo',[{}])[0]; m=ii.get('extmetadata',{})
+              g=lambda k: re.sub('<[^>]+>','',m.get(k,{}).get('value',''))[:90]
+              print(f\"{ii.get('duration',0) or 0:>7.0f}s | {g('LicenseShortName'):<14} | {p['title']} | {ii.get('url')} | {g('Artist')}\")
+          "
+          done
+      - name: Internet Archive
+        run: |
+          for q in 'singing bowls' 'sound bath' 'tibetan bowls' 'crystal singing bowls'; do
+            echo "=== Archive: $q"
+            curl -s "https://archive.org/advancedsearch.php?q=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote('(\"'+sys.argv[1]+'\") AND mediatype:audio AND licenseurl:*'))" "$q")&fl[]=identifier&fl[]=title&fl[]=licenseurl&fl[]=creator&rows=40&output=json" \
+            | python3 -c "
+          import json,sys
+          for x in json.load(sys.stdin)['response']['docs']:
+              print(x.get('licenseurl'),'|',x['identifier'],'|',str(x.get('title'))[:80],'|',x.get('creator'))
+          "
+          done
