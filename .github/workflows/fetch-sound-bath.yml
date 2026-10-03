@@ -1,0 +1,33 @@
+# One-off: copy the sound bath recording into the repo as an MP3. Deleted after use.
+# "Cuencos tibetanos al ser percutidos" by Luis Alvaz, CC BY-SA 4.0, Wikimedia Commons.
+name: Fetch sound bath audio
+on:
+  push:
+    branches: [claude/intelligent-meitner-9txxo3]
+    paths: [.github/workflows/fetch-sound-bath.yml]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and convert (format change only, no edits)
+        run: |
+          set -euo pipefail
+          sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y ffmpeg >/dev/null
+          curl -fsSL -A "BluVedaSiteBot/1.0 (olly@madeclearstudios.com)" -o source.wav \
+            "https://upload.wikimedia.org/wikipedia/commons/3/34/Cuencos_tibetanos_al_ser_percutidos.wav"
+          mkdir -p src/audio
+          ffmpeg -hide_banner -loglevel error -i source.wav -codec:a libmp3lame -b:a 96k \
+            -metadata title="Cuencos tibetanos al ser percutidos" -metadata artist="Luis Alvaz" \
+            -metadata copyright="CC BY-SA 4.0" src/audio/sound-bath.mp3
+          ls -la src/audio
+          ffprobe -hide_banner src/audio/sound-bath.mp3 2>&1 | grep -E 'Duration|Stream'
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/audio/sound-bath.mp3
+          git commit -m "Add sound bath audio (Luis Alvaz, CC BY-SA 4.0, converted to MP3)"
+          git push
