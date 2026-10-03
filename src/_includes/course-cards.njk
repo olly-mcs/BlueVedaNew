@@ -1,5 +1,11 @@
 {#- Course cards. Shows every published course, or set `cardCourses` before including to pass your own list. -#}
 {%- set items = cardCourses if cardCourses is defined else (collections.courses | publishedCourses) -%}
+{%- if cardCourses is not defined %}
+<div class="cards-header">
+  <div class="label _30-margin">Sessions</div>
+  <h2 class="heading-14 cards-header__title">Yoga &amp; holistic therapies</h2>
+</div>
+{%- endif %}
 <div class="products-list-wrapper w-dyn-list">
   <div role="list" class="product-list course-list{{ ' course-list--single' if items.length == 1 }} w-dyn-items">
     {%- for c in items %}
