@@ -597,14 +597,22 @@ p.heading1specialabout.wellness,
 .page-intro__content .label._30-margin { margin-bottom: 12px; text-align: left; }
 .heading1specialabout.page-intro__title { display: block; margin: 0 0 24px; text-align: left; }
 .heading1specialabout.page-intro__title--quote { font-size: var(--fs-h2); line-height: 1.3; }
-.page-intro__lead {
-  color: #5a5a5a;
-  margin: 0 0 20px;
-  font-family: var(--font-body);
+/* Opening paragraphs: the sage Arvo style first used on the course pages.
+   Also used for the Home welcome, Contact intro, services intro and
+   closing booking text. */
+.page-intro__lead,
+.services__intro,
+.page-cta__text,
+.column.aboutuscolumn .big-paragraph.max-500.right,
+.column.aboutuscolumn .big-paragraph.max-500.below {
+  color: var(--sage);
+  font-family: var(--font-heading);
   font-size: var(--fs-lead);
+  font-weight: 400;
   line-height: 1.6;
 }
-.page-intro__lead--accent { color: var(--sage); font-family: var(--font-heading); }
+.page-intro__lead { margin: 0 0 20px; }
+.home-welcome__lead { margin: 0 0 20px; }
 .page-intro__text {
   color: var(--textgrey);
   margin: 0 0 16px;
@@ -651,14 +659,7 @@ p.heading1specialabout.wellness,
 }
 .section.page-cta.page-cta--white { background-color: var(--white); }
 .heading-14.page-cta__title { color: var(--sage); max-width: 640px; margin: 0 auto; }
-.page-cta__text {
-  color: var(--textgrey);
-  max-width: 560px;
-  margin: 16px auto 0;
-  font-family: var(--font-body);
-  font-size: var(--fs-lead);
-  line-height: 1.6;
-}
+.page-cta__text { max-width: 560px; margin: 16px auto 0; }
 .button.page-cta__button { margin-top: 32px; }
 
 @media screen and (max-width: 991px) {
@@ -984,13 +985,7 @@ body { --course-photo-w: 480px; }
 .course-body__inner > .services:first-child { margin-top: 0; }
 .services__header { margin-bottom: 8px; }
 .services__header .label._30-margin { margin-bottom: 8px; text-align: left; }
-.services__intro {
-  color: var(--textgrey);
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--fs-lead);
-  line-height: 1.6;
-}
+.services__intro { margin: 0; }
 
 .service-group { margin-top: 56px; }
 .service-group__title {
