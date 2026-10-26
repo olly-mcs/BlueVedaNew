@@ -672,6 +672,8 @@ p.heading1specialabout.wellness,
   .page-intro__grid { width: 90%; grid-template-columns: 1fr; gap: 32px; }
   .page-intro--top .page-intro__media { position: static; }
   .page-intro__image { aspect-ratio: 4 / 3; }
+  /* Portraits: show the whole photo on phones so heads are never cropped */
+  .page-intro__image--whole-on-mobile { aspect-ratio: auto; }
   .section.page-story, .section.page-cta { padding: 56px 0; }
 }
 
