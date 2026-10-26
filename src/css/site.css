@@ -1158,6 +1158,15 @@ body { --course-photo-w: 480px; }
 .form-field.w-select { height: 60px; padding-left: 26px; }
 .form-field.w-select:invalid { color: #8a8a8a; }
 
+/* Home: qualification badges under the welcome text */
+.home-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px; }
+.home-badges img { display: block; width: 76px; height: 76px; }
+@media screen and (max-width: 479px) {
+  .home-badges img { width: 64px; height: 64px; }
+  /* Match the rest of the welcome text, which Webflow centres at 80% on phones */
+  .home-welcome__lead { width: 80%; margin-left: auto; margin-right: auto; text-align: center; }
+}
+
 /* Home: keep the About me button centred under the photo */
 .hero-image-column.mobhp .grid-6 > div:first-child { text-align: center; }
 .hero-image-column.mobhp .grid-6 > div:first-child .button { margin-top: 20px; }
